@@ -1,0 +1,62 @@
+package shop.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import shop.service.ProductService;
+import shop.vo.Product;
+public class ProductController implements Controller{
+
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String name=req.getParameter("name");
+		boolean isPd = true;
+		
+		if(name.equals("Welcome")) {
+			req.setAttribute("id",null);
+			ArrayList<Product> list=ProductService.getInstance().productbestList(true);
+			req.setAttribute("list", list);
+			isPd = false;
+			}
+		else if(name.equals((String)req.getAttribute("id"))) {
+			req.setAttribute("id", (String)req.getAttribute("id"));
+			ArrayList<Product> list=ProductService.getInstance().productbestList(true);
+			req.setAttribute ("list", list);
+			isPd = false;
+		}
+		else if(name.equals("All_Item")) {
+			ArrayList<Product> list=ProductService.getInstance().productbestList(false);
+			req.setAttribute("list", list);
+			isPd = true;
+		}
+		else if(name.equals("More"))
+		{
+			String img=req.getParameter("img");
+			String pname=req.getParameter("pname");
+			String price=req.getParameter("price");
+			
+			System.out.println(img+", "+pname+", "+price);
+			
+			req.setAttribute("img",img);
+			req.setAttribute("pname",pname);
+			req.setAttribute("price",price);
+			
+			HttpUtil.forward(req,resp,"/product.jsp");
+		}
+		else {
+			ArrayList<Product> list = ProductService.getInstance().productList(name);
+			req.setAttribute("list", list);
+			isPd = true;
+		}
+		req.setAttribute("is", isPd);
+		req.setAttribute("name", name);
+		HttpUtil.forward(req,resp,"/CheckOneShop.jsp");
+		
+	}
+
+}

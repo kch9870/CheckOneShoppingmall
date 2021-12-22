@@ -1,0 +1,45 @@
+package shop.controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import shop.service.MemberService;
+import shop.vo.Member;
+
+public class LoginController implements Controller{
+
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String id = req.getParameter("id");
+		String pwd = req.getParameter("passwd");
+		int check=0;
+		// service 객체
+				MemberService service = MemberService.getInstance();
+				service.memberLogin(id,pwd,check);
+				
+		if(check==0)
+		{
+			req.setAttribute("id", id);
+			HttpUtil.forward(req, resp, "/ResultLogin.jsp");//0일때 로그인 되었습니다->ResultLogin.jsp화면으로 이동
+		}
+		else if(check==1)
+		{
+			req.setAttribute("check", check);
+			HttpUtil.forward(req, resp, "/Login.jsp");//1일때 비밀번호가 틀렸습니다
+		}
+		else if(check==2)
+		{
+			req.setAttribute("check", check);
+			HttpUtil.forward(req, resp, "/Login.jsp");//1일때 비밀번호가 틀렸습니다
+		}//2일때 아이디가 존재하지 않습니다.
+				
+		
+		
+	}
+
+}

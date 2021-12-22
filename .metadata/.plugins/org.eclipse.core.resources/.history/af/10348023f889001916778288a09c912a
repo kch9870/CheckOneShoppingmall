@@ -1,0 +1,30 @@
+package shop.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import shop.service.ProductService;
+import shop.vo.Product;
+public class ProductController implements Controller{
+
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		String path=null;
+		
+		
+
+		ProductService service = ProductService.getInstance();
+		Product productOut = service.productOut();
+		
+		req.setAttribute("product", productOut);
+		HttpUtil.forward(req, resp,path);
+		
+	}
+
+}
+

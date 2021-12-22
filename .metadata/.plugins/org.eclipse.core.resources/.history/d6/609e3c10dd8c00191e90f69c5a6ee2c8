@@ -1,0 +1,146 @@
+package shop.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import shop.vo.Member;
+import shop.vo.Product;
+import shop.vo.Cart;
+
+public class ProductDAO {
+	private static ProductDAO productDao = new ProductDAO();
+	
+	private ProductDAO() {}
+	
+	public static ProductDAO getInstance()
+	{
+		return productDao;
+	}
+	public Connection connect()
+	{
+		Connection conn = null;
+		try
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop?serverTimezone=UTC", "root", "1234");
+		}catch(Exception e)
+		{			
+			e.printStackTrace();
+		}
+		return conn;
+	}
+	public ArrayList<Product> productList(String name)
+	{
+		ArrayList<Product> list=new ArrayList<Product>();
+		Product product=null;
+		ResultSet rs=null;
+		PreparedStatement pstmt=null;
+		Connection con=null;
+		try {
+			con = connect();
+			pstmt = con.prepareStatement("select * from products where kind=?");
+			pstmt.setString(1,name);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				product = new Product();
+				product.setP_code(rs.getString(1));
+				product.setName(rs.getString(2));
+				product.setKind(rs.getString(3));
+				product.setPrice(rs.getString(4));
+				product.setImage(rs.getString(5));
+				list.add(product);		
+			}
+		}catch(SQLException se) {
+	         throw new RuntimeException(
+	                 "A database error occurred"+se.getMessage());
+	        }
+	
+
+		return list;
+	}
+	   public ArrayList<Product> productbestList(boolean tt)
+	   {
+	      ArrayList<Product> list=new ArrayList<Product>();
+	      Product product=null;
+	      try {
+	         Connection con = connect();
+	        
+	            PreparedStatement pstmt = con.prepareStatement("SELECT * FROM shop.products order by test desc;");
+	            ResultSet rs = pstmt.executeQuery();
+	            if(tt)
+	            	for(int i=0;i<3;i++)
+			         {           
+			            if(rs.next()) {
+			               product = new Product();
+			               product.setP_code(rs.getString(1));
+			               product.setName(rs.getString(2));
+			               product.setKind(rs.getString(3));
+			               product.setPrice(rs.getString(4));
+			               product.setImage(rs.getString(5));
+			               list.add(product);      
+			            }
+			         }
+	            else {
+	            	while(rs.next()) {
+			               product = new Product();
+			               product.setP_code(rs.getString(1));
+			               product.setName(rs.getString(2));
+			               product.setKind(rs.getString(3));
+			               product.setPrice(rs.getString(4));
+			               product.setImage(rs.getString(5));
+			               list.add(product);      
+			            }
+	            }
+	      }catch(Exception e)
+	      {
+	         e.printStackTrace();
+	      }
+	      return list;
+	   }
+	   
+	   public ArrayList<Cart> insertCart(int count,String id, String Pcode)
+		{
+		   	Product product=null;
+		   	Cart cart = new Cart();
+		   	ArrayList<Cart> list = new ArrayList();
+			try {
+				Connection con = this.connect();
+				PreparedStatement pstmt = con.prepareStatement("SELECT * FROM shop.products where p_code = ?;");
+				pstmt.setString(1, Pcode);
+	            ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+		               product = new Product();
+		               product.setP_code(rs.getString(1));
+		               product.setName(rs.getString(2));
+		               product.setKind(rs.getString(3));
+		               product.setPrice(rs.getString(4));
+		               product.setImage(rs.getString(5));
+		        }
+				else {
+					//오류출력
+				}
+				con = this.connect();
+				pstmt = con.prepareStatement("insert into cart values(?,?,?,?)");
+				pstmt.setString(1, Integer.toString(Cart.ccode++));
+				pstmt.setString(2, Pcode);
+				pstmt.setString(3, id);
+				pstmt.setInt(4, count);
+				pstmt.executeUpdate();
+				
+				cart.setCount(count);
+				cart.setId(id);
+				cart.setProduct(product);
+				
+				list.add(cart);
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			return list;
+		}
+}
+

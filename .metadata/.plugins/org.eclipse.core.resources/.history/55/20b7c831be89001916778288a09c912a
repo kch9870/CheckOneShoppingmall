@@ -1,0 +1,17 @@
+package shop.service;
+
+import java.util.ArrayList;
+
+import shop.dao.MemberDAO;
+import shop.vo.Member;
+
+public class ProductService {
+	private static ProductService service = new ProductService();
+	public MemberDAO dao = MemberDAO.getInstance();
+	private ProductService(){}
+	
+	public static ProductService getInstance() {
+		return service;
+	}
+	
+}

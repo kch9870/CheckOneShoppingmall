@@ -1,0 +1,54 @@
+package shop.vo;
+
+public class Cart {
+	private String id;
+	private String m_name;
+	private String p_code;
+	private String name;
+	private String kind;
+	private String price;
+	private String image;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getMName() {
+		return m_name;
+	}
+	public void setMName(String m_name) {
+		this.m_name = m_name;
+	}
+	public String getP_code() {
+		return p_code;
+	}
+	public void setP_code(String p_code) {
+		this.p_code = p_code;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+}

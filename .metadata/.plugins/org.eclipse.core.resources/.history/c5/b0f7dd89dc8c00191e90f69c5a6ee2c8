@@ -1,0 +1,31 @@
+package shop.service;
+
+import java.util.ArrayList;
+
+import shop.dao.ProductDAO;
+import shop.vo.Member;
+import shop.vo.Product;
+
+public class ProductService {
+	private static ProductService service = new ProductService();
+	public ProductDAO dao = ProductDAO.getInstance();
+	private ProductService(){}
+	
+	public static ProductService getInstance() {
+		return service;
+	}
+	
+	public ArrayList<Product> productList(String name)
+	{
+		return dao.productList(name);
+	}
+	
+	public ArrayList<Product> productbestList(boolean tt)
+	{
+		return dao.productbestList(tt);
+	}
+	 public cart insertCart(int count,String id, String Pcode) {
+		 return dao.insertCart(count,id,Pcode);
+	 }
+	
+}

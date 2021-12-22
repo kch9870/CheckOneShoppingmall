@@ -1,0 +1,121 @@
+* {
+		padding:0;
+		margin:0;
+	}
+	header
+	{
+		width:995px;
+		height:100px;
+		margin-top:10px;
+	}
+	header nav
+	{
+		float:left;
+		width:70%;
+		margin-top:10px;
+
+	}
+	nav ul
+	{
+		list-style-type:none;
+	}
+	nav ul li
+	{
+		display:inline;
+		text-align: center;
+		font-weight:bold;
+		margin:30px;
+		background-color:#003300; 
+	}
+	nav ul li a
+	{
+		color:white;
+		text-decoration:none;
+	}
+	nav
+	{
+		width:995px;
+		height:30px;
+		margin-top:70px;
+	}
+	li
+	{
+		list-style-type:none;
+		display:inline-block;
+	}
+	ul
+	{
+		text-align:center;
+	}
+	nav li
+	{
+
+	}
+	section
+	{
+		width:674px;
+		height:1000px;
+		margin-top:10px;
+		float:left;
+	}
+	aside
+	{
+		width:290px;
+		height:240px;
+		margin-top:10px;
+		margin-left:20px;
+		float:left;
+	}
+	footer
+	{
+		width:995px;
+		height:130px;
+		border:1px solid green;
+		margin-top:10px;
+		background-color:#003300; 
+	}
+	.clear
+	{
+		clear:both;
+	}
+	#logo
+	{
+		border:solid 3px #003300;
+		text-align:center;
+		font-size:50px;
+		font-style:"µ¸À½Ã¼";
+		background-color: #003300;
+	}
+	#top li a
+	{
+		color: black;
+		background-color:#FFFFFF;
+	}
+	#top li
+	{
+		float:right;
+		margin: 0px 10px 0 0;
+	}
+	#top nav
+	{
+		float:right;
+		
+	}
+	#address
+	{
+		float:left;
+		margin: 70px 0 0 100px;
+	}
+	#customer
+	{
+		margin:70px 0 0 100px;
+		text-align: center;
+		color: #FFFFFF;
+	}
+	#page
+	{
+		width:995px;
+		margin:0 auto;
+		border:solid 1px red;
+		color: #FFFFFF;
+	}

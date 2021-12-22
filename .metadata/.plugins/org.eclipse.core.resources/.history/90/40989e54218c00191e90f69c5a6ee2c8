@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="shop.vo.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Check!One Shop♥</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Archivo+Narrow:400,700" rel="stylesheet" type="text/css">
+<link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<script type="text/javascript">
+         $(document).ready(function() {  
+            //[4] bind메서드
+            // $('#btn').bind("click", function(){ alert('button clicked'); });
+ 
+            //[!] 페이지 로드시 사용자의 반응이 아닌 코드에 의해서 click 이벤트를 실행
+             $('#btn1').trigger("click"); //실행하자마자 click 이벤트를 트리거함....        
+        });
+    </script>
+<body>	
+	<form action="mainProduct.do" name="main" method="get">
+		<div id="logo">
+			<h1><span>Check!One Shop</span><input type="submit" name="name" value="Welcome" id="btn1"></input></h1>
+		</div>
+	</form>
+</body>
+
+</html>

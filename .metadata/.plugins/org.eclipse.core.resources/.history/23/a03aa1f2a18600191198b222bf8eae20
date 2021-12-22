@@ -1,0 +1,17 @@
+var userid = document.querySelector("#user-id");
+var userpw = document.querySelector("#user-pw");
+
+function login()
+{
+	if(userid.value == "kch9870" && userpw.value == "king9870")
+	{
+		alert("김채원님 반갑습니다!");
+		location.href="ResultLogin.html";
+	}
+	else
+	{
+		alert("아이디와 비밀번호를 다시 한번 확인해주세요.");
+		userid.value="";
+		userpw.value="";
+	}
+}

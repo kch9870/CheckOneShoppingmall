@@ -1,0 +1,16 @@
+package shop.vo;
+
+public class Cart {
+	private String id;
+	private Product product;
+	private int count;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
+}

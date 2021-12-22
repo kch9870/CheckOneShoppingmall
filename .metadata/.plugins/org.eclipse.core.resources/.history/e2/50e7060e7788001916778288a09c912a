@@ -1,0 +1,34 @@
+package shop.controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import shop.service.MemberService;
+import shop.vo.Member;
+
+public class LoginController implements Controller{
+
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String id = req.getParameter("id");
+		String pwd = req.getParameter("passwd");
+		
+		//dbÀÇ select¹®À» ÀÌ¿ëÇØ¼­, selectµÈ°Ô ÀÖ³ª ¾ø³ª ºÎÅÍ ®c
+		//1. ÀÖÀ¸¸é
+		//   select passwd from shop.member where id = "id";
+		//   if(passwd == pwd) ·Î±×ÀÎ ¼º°ø 
+		//   else   Æ²¸³´Ï´Ù Ç¥½Ã
+		//2. ¾øÀ¸¸é
+		//   id¾ø½À´Ï´Ù. Ç¥½Ã
+		//output
+		req.setAttribute("id", id);
+		HttpUtil.forward(req, resp, "/ResultLogin.jsp");
+		
+	}
+
+}

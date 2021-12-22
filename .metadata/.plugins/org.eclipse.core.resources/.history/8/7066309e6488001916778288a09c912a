@@ -1,0 +1,37 @@
+package shop.controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import shop.service.MemberService;
+import shop.vo.Member;
+
+public class LoginController implements Controller{
+
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String id = req.getParameter("id");
+		String pwd = req.getParameter("passwd");
+		
+		Member member = new Member();
+		member.setId(id);
+		member.setPasswd(pwd);
+		
+		System.out.println(member.getId());
+		
+		// service °´Ã¼
+		MemberService service = MemberService.getInstance();
+		service.memberLogin(member);
+		
+		//output
+		req.setAttribute("id", id);
+		HttpUtil.forward(req, resp, "/ResultLogin.jsp");
+		
+	}
+
+}

@@ -1,0 +1,44 @@
+package shop.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import shop.service.MemberService;
+import shop.service.ProductService;
+import shop.vo.Product;
+import shop.vo.Cart;
+
+public class CartController implements Controller{
+	
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		String logid=req.getParameter("logid");
+		String where=req.getParameter("where");
+		int count=Integer.parseInt(req.getParameter("count"));
+		
+		Cart cart = null;
+		ProductService service = ProductService.getInstance();
+		
+		System.out.println();
+		
+		if(!where.equals("home")) {//제품상세페이지에서 왔을때
+
+			String pcode=req.getParameter("pcode");
+			cart = new Cart();
+			cart.setCount(count);
+			cart.setId(logid);
+			cart.setProduct(service.insertCart(count, id, pcode));
+		}
+		
+		ArrayList<Product> list = service.showCartlist(id);
+		req.setAttribute("count",count);
+		req.setAttribute("list",list);
+		req.setAttribute("logid",id);
+		HttpUtil.forward(req,resp,"/Cart.jsp");
+	}
+}

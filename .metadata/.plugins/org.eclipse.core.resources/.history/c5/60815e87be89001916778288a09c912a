@@ -1,0 +1,23 @@
+package shop.service;
+
+import java.util.ArrayList;
+
+import shop.dao.ProductDAO;
+import shop.dao.Product;
+import shop.vo.Product;
+
+public class ProductService {
+	private static ProductService service = new ProductService();
+	public ProductDAO dao = ProductDAO.getInstance();
+	private ProductService(){}
+	
+	public static ProductService getInstance() {
+		return service;
+	}
+	
+	public Product productout()
+	{
+		
+	}
+	
+}

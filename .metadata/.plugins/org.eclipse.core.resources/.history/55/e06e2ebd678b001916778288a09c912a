@@ -1,0 +1,28 @@
+package shop.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import shop.service.ProductService;
+import shop.vo.Product;
+public class ProductController implements Controller{
+
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+
+		ArrayList<Product> list=ProductService.getInstance().productbestList();
+		req.setAttribute("list", list);
+		String tes = "test";
+		if(tes.equals("best"))
+		HttpUtil.forward(req,resp,tes);
+		
+		System.out.println(list.get(1).getName());
+	}
+
+}

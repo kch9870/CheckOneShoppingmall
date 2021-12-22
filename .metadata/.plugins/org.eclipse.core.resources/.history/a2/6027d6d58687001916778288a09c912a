@@ -1,0 +1,60 @@
+#container{
+	width:1200px;
+	margin:0 auto;
+	
+}
+section
+{
+	margin-left: 270px;
+}
+#user-info {
+	list-style:none;
+}
+#user-info li {
+	clear:both;
+}
+.field {
+	float:left;
+	width:100px;
+	font-weight:bold;
+	font-size:0.9em;
+	line-height: 55px;
+	text-align:right;
+	margin-right:15px;
+}
+input[type="text"], input[type="password"], input[type="email"] {
+	float:left;
+	width:350px;
+	height:35px;
+	border:1px solid #aaa;
+	border-radius:5px;
+	padding:5px;
+	margin:10px 0;
+	float:left;	
+}
+
+.r {
+	line-height:55px;
+}
+
+#buttons > li {
+	display:inline-block;
+}
+button {
+	width:250px;
+	height:50px;
+	margin-right:10px;
+	border:1px solid #ccc;
+	background:#eee;
+	font-size:0.9em;
+}
+footer
+	{
+		
+	}
+#h1-register
+{
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}

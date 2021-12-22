@@ -1,0 +1,63 @@
+package shop.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import shop.service.MemberService;
+import shop.vo.*;
+
+
+
+public class LoginController implements Controller{
+
+	
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String id = req.getParameter("id");
+		String pwd = req.getParameter("passwd");
+		
+		
+		// service 객체
+		MemberService service = MemberService.getInstance();
+		service.memberLogin(id);
+				
+		if(check==0)
+		{
+			req.setAttribute("id", id);
+			HttpUtil.forward(req, resp, "/ResultLogin.jsp");
+			return;//0일때 로그인 되었습니다->ResultLogin.jsp화면으로 이동
+		}
+		else if(check==1)
+		{
+			   resp.setCharacterEncoding("UTF-8");
+			   PrintWriter writer = resp.getWriter();
+			   writer.println("<script type='text/javascript'>");
+			   writer.println("alert('비밀번호가 틀립니다.');");
+			   writer.println("history.back();");
+			   writer.println("</script>");
+			   writer.flush();
+			   return;//1일때 비밀번호가 틀렸습니다
+		}
+		else if(check==2)
+		{
+			 resp.setCharacterEncoding("UTF-8");
+			 PrintWriter writer = resp.getWriter();
+			 writer.println("<script type='text/javascript'>");
+			 writer.println("alert('아이디가 존재하지 않습니다.');");
+			 writer.println("history.back();");
+			 writer.println("</script>");
+			 writer.flush();
+			 return;
+		}//2일때 아이디가 존재하지 않습니다.
+				
+		
+		
+	}
+
+}

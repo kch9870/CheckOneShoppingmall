@@ -1,0 +1,33 @@
+package shop.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import shop.service.MemberService;
+import shop.service.ProductService;
+import shop.vo.Product;
+import shop.vo.Cart;
+
+public class CartController implements Controller{
+	
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		String pcode=req.getParameter("pcode");
+		String id=req.getParameter("id");
+		int count=Integer.parseInt(req.getParameter("count"));
+		Cart cart = new Cart();
+		
+		cart.setCount(Integer.parseInt(count));
+		
+		
+		ProductService service = ProductService.getInstance();
+		service.insertCart(Integer.parseInt(count), id, pcode);
+		
+		
+	}
+}

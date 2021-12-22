@@ -1,0 +1,148 @@
+package shop.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import shop.vo.Member;
+
+public class MemberDAO {
+	private static MemberDAO memberDao = new MemberDAO();
+	
+	private MemberDAO() {}
+	
+	public static MemberDAO getInstance()
+	{
+		return memberDao;
+	}
+	public Connection connect()
+	{
+		Connection conn = null;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop?serverTimezone=UTC", "root", "1234");
+		}catch(Exception e)
+		{			
+			e.printStackTrace();
+		}
+		return conn;
+	}
+	
+	public void memberInsert(Member member)
+	{
+		try {
+			Connection con = this.connect();
+			PreparedStatement pstmt = con.prepareStatement("insert into member values(?,?,?,?)");
+			pstmt.setString(1, member.getId());
+			pstmt.setString(2, member.getPasswd());
+			pstmt.setString(3, member.getName());
+			pstmt.setString(4, member.getMail());
+			
+			pstmt.executeUpdate();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	public String memberLogin(String id,String pwd)
+	{
+		/*
+		 아이디는 여기서만 찾을거임.
+		 엠쁘띠가 오면 어떻게 처리하지? 엠쁘띠값은 어떻게 오는거지? null? 아니면 그냥 비어있는 값? 오류? 쓰레기값? 그럼 어떻게 되는거지?*/
+		
+		 try{
+			 Connection con = connect(); 
+			 PreparedStatement pstmt = con.prepareStatement("select passwd from member where id=?");
+			 pstmt.setString(1, id);
+			 ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+				}
+			}
+		 catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+	}
+	
+	public Member memberSearch(String id)
+	{
+		Member member=null;
+		try {
+			Connection con = connect();
+			PreparedStatement pstmt = con.prepareStatement("select * from member where id = ?");
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				member = new Member();
+				member.setId(rs.getString(1));
+				member.setPasswd(rs.getString(2));
+				member.setName(rs.getString(3));
+				member.setMail(rs.getString(4));	
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return member;
+	}
+	
+	public void memberUpdate(Member member)
+	{
+		try {
+			Connection con = this.connect();
+			PreparedStatement pstmt = con.prepareStatement("update member set passwd=?,name=?,mail=? where id=?");
+			pstmt.setString(1, member.getPasswd());
+			pstmt.setString(2, member.getName());
+			pstmt.setString(3, member.getMail());
+			pstmt.setString(4, member.getId());
+			
+			pstmt.executeUpdate();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<Member> memberList()
+	{
+		ArrayList<Member> list=new ArrayList<Member>();
+		Member member=null;
+		try {
+			Connection con = connect();
+			PreparedStatement pstmt = con.prepareStatement("select * from member");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				member = new Member();
+				member.setId(rs.getString(1));
+				member.setPasswd(rs.getString(2));
+				member.setName(rs.getString(3));
+				member.setMail(rs.getString(4));
+				list.add(member);		
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public Member memberDelete(Member member)
+	{
+		try {
+			Connection con = this.connect();
+			PreparedStatement pstmt = con.prepareStatement("delete from member where id=?");
+			pstmt.setString(1, member.getId());
+
+			pstmt.executeUpdate();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return member;
+	}
+}
+
