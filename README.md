@@ -28,3 +28,10 @@
 ## 구조 
 
 ![1학기 쇼핑몰 프로젝트 구조](https://user-images.githubusercontent.com/48307933/147436195-24efb621-b22b-4819-ae27-6adb5a85ee5e.png)
+
+--------------------------------------------------------------------------------
+
+## 참고 자료
+
+['CheckOneShoppingmall' 최종.pptx](https://github.com/kch9870/CheckOneShoppingmall/files/7778433/1.pptx)
+
